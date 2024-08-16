@@ -20,6 +20,7 @@ type Props = {
 };
 
 export const Card = ({ card }: Props) => {
+  const [hasHydrated, setHasHydrated] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
   const { addToCart, cart, removeFromCart } = useCartStore();
@@ -36,6 +37,13 @@ export const Card = ({ card }: Props) => {
       setIsAddedToCart(false);
     }
   }, [cart, card.id]);
+
+  useEffect(() => {
+    setHasHydrated(true);
+  }, []);
+
+  if (!hasHydrated) return null;
+
   return (
     <div>
       <div className="relative w-fit">
